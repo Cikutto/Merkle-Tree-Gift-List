@@ -1,5 +1,7 @@
 const express = require('express');
 const verifyProof = require('../utils/verifyProof');
+const niceList = require('../utils/niceList.json');
+const MerkleTree = require('../utils/MerkleTree');
 
 const port = 1225;
 
@@ -14,9 +16,10 @@ app.post('/gift', (req, res) => {
   // grab the parameters from the front-end here
   
   const {name, proof, root} = req.body;
+  
 
   // TODO: prove that a name is in the list 
-  const isInTheList = false;
+  const isInTheList = verifyProof(proof, name, root);
   if(isInTheList) {
     res.send("You got a toy robot!");
   }

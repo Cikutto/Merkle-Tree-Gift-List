@@ -4,15 +4,15 @@ const MerkleTree = require('../utils/MerkleTree');
 
 const serverUrl = 'http://localhost:1225';
 
+
 async function main() {
   
+  
+  // TODO: how do we prove to the server we're on the nice list? 
   const tree = new MerkleTree(niceList)
   console.log(tree.getRoot())
-
-  // TODO: how do we prove to the server we're on the nice list? 
   const root = tree.getRoot();
-  const niceListNames = process.argv.slice(2);
-  const name = niceListNames.join(" ");
+  const name = process.argv.slice(2).join(" ");
   const index = niceList.findIndex(n => n === name);
   const proof = tree.getProof(index);
   
@@ -21,9 +21,12 @@ async function main() {
     name,
     proof,
     root
+   
   });
   
   console.log({ gift });
+  
+
 }
 
 
